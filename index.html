@@ -20,7 +20,6 @@
             padding: 24px;
         }
 
-        /* Основной контейнер — теперь с двумя колонками */
         .dashboard {
             max-width: 1200px;
             width: 100%;
@@ -29,7 +28,6 @@
             align-items: stretch;
         }
 
-        /* Левая панель — все элементы управления */
         .left-panel {
             flex: 1.2;
             background-color: #ffffff;
@@ -41,7 +39,6 @@
             flex-direction: column;
         }
 
-        /* Правая панель — область ответа */
         .right-panel {
             flex: 1;
             background-color: #ffffff;
@@ -53,7 +50,6 @@
             flex-direction: column;
         }
 
-        /* Заголовок с логотипом */
         .header {
             display: flex;
             align-items: center;
@@ -83,7 +79,6 @@
             margin-top: 4px;
         }
 
-        /* Стили полей ввода (левая панель) */
         .input-block {
             margin-bottom: 28px;
         }
@@ -115,7 +110,6 @@
             box-shadow: 0 0 0 4px rgba(0, 168, 132, 0.08);
         }
 
-        /* Кнопки управления */
         .action-stack {
             display: flex;
             flex-direction: column;
@@ -164,7 +158,6 @@
             border-color: #00a884;
         }
 
-        /* Выпадающие панели */
         .inline-panel {
             background: #fafcff;
             border-radius: 22px;
@@ -219,7 +212,6 @@
             width: auto;
         }
 
-        /* Правая панель — ответ */
         .response-header {
             display: flex;
             justify-content: space-between;
@@ -303,11 +295,11 @@
 </head>
 <body>
 <div class="dashboard">
-    <!-- ЛЕВАЯ КОЛОНКА: все элементы управления -->
+    <!-- ЛЕВАЯ КОЛОНКА: элементы управления -->
     <div class="left-panel">
         <div class="header">
-            <!-- Реальный логотип GREEN-API -->
-            <img class="logo-img" src="https://static.rustore.ru/imgproxy/CPAfQM6Sv_cWZzgdSbc_gPcqeIYxvhPPsfI6EN9SrtU/preset:vk_og_img/plain/https://static.rustore.ru/apk/2063583573/content/ICON/0e41c60f-96af-4b71-9da9-13eae6a9b6b2.png" alt="GREEN-API logo">
+            <!-- Локальный логотип GREEN-API -->
+            <img class="logo-img" src="logo.png" alt="GREEN-API logo">
             <div class="title-section">
                 <h2>GREEN-API</h2>
                 <div class="sub">Тестовая панель методов</div>
@@ -323,24 +315,24 @@
             <input type="password" id="apiTokenInstance" class="field" placeholder="••••••••••••••••" autocomplete="off">
         </div>
 
-        <!-- Кнопки методов (столбиком) -->
+        <!-- Кнопки методов (вертикально) -->
         <div class="action-stack">
             <button class="btn btn-primary" id="btnGetSettings">⚙️ getSettings</button>
             <button class="btn btn-primary" id="btnGetStateInstance">📡 getStateInstance</button>
         </div>
 
-        <!-- Блок sendMessage с выпадающей панелью -->
+        <!-- sendMessage с выпадающей панелью -->
         <div>
             <button class="btn btn-outline" id="btnSendMessage">💬 sendMessage</button>
             <div id="sendMessagePanel" class="inline-panel" style="display: none;">
                 <div class="row-dual">
                     <div class="dual-item">
                         <label>📞 Chat ID (WhatsApp)</label>
-                        <input type="text" id="chatId" class="inline-field" placeholder="7777234567@c.us" value="7777234567@c.us">
+                        <input type="text" id="chatId" class="inline-field" placeholder="Укажите chatId получателя">
                     </div>
                     <div class="dual-item">
                         <label>💬 Сообщение</label>
-                        <input type="text" id="messageText" class="inline-field" placeholder="Hello Gmail!" value="Hello Gmail!">
+                        <input type="text" id="messageText" class="inline-field" placeholder="Введите текст сообщения">
                     </div>
                 </div>
                 <div class="panel-action-btn">
@@ -349,24 +341,24 @@
             </div>
         </div>
 
-        <!-- Блок sendFileByUrl с выпадающей панелью -->
+        <!-- sendFileByUrl с выпадающей панелью -->
         <div style="margin-top: 8px;">
             <button class="btn btn-outline" id="btnSendFileByUrl">📎 sendFileByUrl</button>
             <div id="sendFilePanel" class="inline-panel" style="display: none;">
                 <div class="row-dual">
                     <div class="dual-item">
                         <label>📞 Chat ID</label>
-                        <input type="text" id="fileChatId" class="inline-field" placeholder="7777234567@c.us" value="7777234567@c.us">
+                        <input type="text" id="fileChatId" class="inline-field" placeholder="Укажите chatId получателя">
                     </div>
                     <div class="dual-item">
                         <label>🔗 URL файла</label>
-                        <input type="text" id="fileUrl" class="inline-field" placeholder="https://..." value="https://avatars.mds.yandex.net/i?id=907e62a6623d91c19e9d33c37940198b_l-8310482-images-thumbs&n=13">
+                        <input type="text" id="fileUrl" class="inline-field" placeholder="Вставьте ссылку на файл">
                     </div>
                 </div>
                 <div class="row-dual">
                     <div class="dual-item">
                         <label>📄 Имя файла</label>
-                        <input type="text" id="fileName" class="inline-field" placeholder="horse.png" value="horse.png">
+                        <input type="text" id="fileName" class="inline-field" placeholder="Укажите наименование файла">
                     </div>
                     <div class="dual-item"></div>
                 </div>
@@ -376,7 +368,7 @@
             </div>
         </div>
 
-        <!-- GitHub ссылка (в левой колонке снизу) -->
+        <!-- GitHub ссылка -->
         <div class="footer-github">
             <a href="#" id="githubLink" target="_blank">github.com/DzoT1999-sys/test</a>
         </div>
@@ -391,7 +383,6 @@
         <div class="response-box">
             <pre id="responseOutput" class="response-output"></pre>
         </div>
-        <!-- Небольшая подсказка -->
         <div style="margin-top: 16px; color: #6a7f9f; font-size: 13px; text-align: center;">
             ⓘ Ответ отображается в формате JSON
         </div>
@@ -545,16 +536,12 @@
 
         clearBtn.addEventListener('click', clearResponse);
 
-        // Демо-ответ при загрузке (как в макете)
+        // При загрузке очищаем ответ (никаких демо)
         window.addEventListener('load', () => {
-            idInstanceInput.placeholder = "1101234567";
-            apiTokenInput.placeholder = "••••••••••••";
-            setTimeout(() => {
-                responseOutput.textContent = `[DEMO] sendMessage\n{\n  "idMessage": "3EB0C7C70D37B7C7C03D"\n}`;
-            }, 10);
+            clearResponse();
         });
 
-        console.log('✅ Двухколоночный макет GREEN-API активирован');
+        console.log('✅ Двухколоночный макет GREEN-API готов');
     })();
 </script>
 </body>
