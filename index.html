@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GREEN-API Console (Макет)</title>
+    <title>GREEN-API · Тестовая панель</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
@@ -18,39 +18,56 @@
             align-items: center;
             min-height: 100vh;
             padding: 24px;
-            margin: 0;
         }
 
-        /* Основная карточка — как на макете */
-        .console {
-            max-width: 900px;
+        /* Основной контейнер — теперь с двумя колонками */
+        .dashboard {
+            max-width: 1200px;
             width: 100%;
+            display: flex;
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        /* Левая панель — все элементы управления */
+        .left-panel {
+            flex: 1.2;
             background-color: #ffffff;
             border-radius: 32px;
             box-shadow: 0 20px 40px -8px rgba(0, 20, 30, 0.12);
-            padding: 32px 36px;
+            padding: 32px 28px;
             border: 1px solid #eaedf2;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Логотип и заголовок */
+        /* Правая панель — область ответа */
+        .right-panel {
+            flex: 1;
+            background-color: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px -8px rgba(0, 20, 30, 0.12);
+            padding: 32px 28px;
+            border: 1px solid #eaedf2;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Заголовок с логотипом */
         .header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 28px;
+            gap: 14px;
+            margin-bottom: 32px;
         }
 
-        .logo-icon {
-            background-color: #00a884;
-            width: 44px;
-            height: 44px;
+        .logo-img {
+            width: 52px;
+            height: 52px;
             border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 22px;
+            object-fit: contain;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
 
         .title-section h2 {
@@ -63,19 +80,19 @@
         .title-section .sub {
             font-size: 15px;
             color: #5e6f8c;
-            margin-top: 2px;
+            margin-top: 4px;
         }
 
-        /* Группы полей ввода — точь-в-точь как на макете */
+        /* Стили полей ввода (левая панель) */
         .input-block {
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
 
         .input-label {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
             color: #1f2a41;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: block;
         }
 
@@ -85,10 +102,10 @@
             border-radius: 18px;
             padding: 14px 18px;
             width: 100%;
-            font-size: 16px;
+            font-size: 15px;
             color: #0f1a2a;
             transition: 0.15s;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
 
         .field:focus {
@@ -98,35 +115,18 @@
             box-shadow: 0 0 0 4px rgba(0, 168, 132, 0.08);
         }
 
-        .field::placeholder {
-            color: #98a9bb;
-            font-weight: 400;
-        }
-
-        /* Две строки для idInstance и ApiTokenInstance */
-        .credential-row {
+        /* Кнопки управления */
+        .action-stack {
             display: flex;
-            gap: 24px;
-            margin-bottom: 8px;
-        }
-
-        .credential-item {
-            flex: 1;
-        }
-
-        /* Кнопки в строку — в макете они идут подряд */
-        .action-bar {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
+            flex-direction: column;
             gap: 12px;
-            margin: 12px 0 18px;
+            margin-bottom: 24px;
         }
 
         .btn {
             border: none;
             border-radius: 40px;
-            padding: 12px 28px;
+            padding: 14px 20px;
             font-weight: 600;
             font-size: 15px;
             background-color: #edf2f9;
@@ -135,9 +135,11 @@
             transition: all 0.15s ease;
             border: 1px solid transparent;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
-            display: inline-flex;
+            display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
+            width: 100%;
         }
 
         .btn-primary {
@@ -162,30 +164,30 @@
             border-color: #00a884;
         }
 
-        /* Ряды с вложенными полями — в макете под кнопками */
+        /* Выпадающие панели */
         .inline-panel {
             background: #fafcff;
             border-radius: 22px;
             padding: 20px 18px;
-            margin: 18px 0 20px;
+            margin: 10px 0 18px;
             border: 1px solid #e6ecf5;
         }
 
         .row-dual {
             display: flex;
-            gap: 20px;
+            gap: 16px;
             flex-wrap: wrap;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         .dual-item {
             flex: 1;
-            min-width: 180px;
+            min-width: 160px;
         }
 
         .dual-item label {
             display: block;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             color: #435574;
             margin-bottom: 6px;
@@ -194,10 +196,10 @@
         .inline-field {
             background: white;
             border: 1.5px solid #dee6f0;
-            border-radius: 18px;
+            border-radius: 16px;
             padding: 12px 16px;
             width: 100%;
-            font-size: 15px;
+            font-size: 14px;
         }
 
         .inline-field:focus {
@@ -205,48 +207,30 @@
             outline: none;
         }
 
-        /* Секция ответа (readonly) */
-        .response-container {
-            margin-top: 20px;
+        .panel-action-btn {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 6px;
         }
 
-        .response-label {
-            font-size: 15px;
-            font-weight: 600;
-            color: #1f2a41;
-            margin-bottom: 12px;
+        .btn-small {
+            padding: 10px 22px;
+            font-size: 14px;
+            width: auto;
+        }
+
+        /* Правая панель — ответ */
+        .response-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 16px;
         }
 
-        .response-box {
-            background-color: #f2f6fe;
-            border-radius: 24px;
-            padding: 24px;
-            border: 1px solid #e2eaf5;
-        }
-
-        .response-output {
-            background-color: #ffffff;
-            border-radius: 18px;
-            padding: 20px 24px;
-            font-family: 'SF Mono', 'Menlo', 'Monaco', 'Cascadia Code', 'Consolas', monospace;
-            font-size: 14px;
-            line-height: 1.5;
-            color: #1e293b;
-            border: 1px solid #dde3ed;
-            min-height: 140px;
-            max-height: 300px;
-            overflow-y: auto;
-            white-space: pre-wrap;
-            word-break: break-word;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
-        }
-
-        .response-output:empty::before {
-            content: "Ответ появится здесь...";
-            color: #8899b6;
+        .response-header h3 {
+            font-weight: 600;
+            font-size: 18px;
+            color: #1f2a41;
         }
 
         .btn-clear {
@@ -264,23 +248,44 @@
             background: #eef3fc;
         }
 
-        /* Элементы макета: иконки и мелкие штрихи */
-        .mock-note {
-            color: #4a6885;
-            font-size: 14px;
-            margin-left: 6px;
+        .response-box {
+            background-color: #f2f6fe;
+            border-radius: 24px;
+            padding: 24px;
+            border: 1px solid #e2eaf5;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
-        hr {
-            border: none;
-            border-top: 1.5px solid #eef2f8;
-            margin: 20px 0 10px;
+        .response-output {
+            background-color: #ffffff;
+            border-radius: 18px;
+            padding: 24px;
+            font-family: 'SF Mono', 'Menlo', 'Monaco', 'Cascadia Code', 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #1e293b;
+            border: 1px solid #dde3ed;
+            min-height: 300px;
+            max-height: 600px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            margin: 0;
+            flex: 1;
+        }
+
+        .response-output:empty::before {
+            content: "Ответ появится здесь...";
+            color: #8899b6;
         }
 
         .footer-github {
-            margin-top: 18px;
+            margin-top: 20px;
             text-align: right;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .footer-github a {
@@ -288,97 +293,108 @@
             text-decoration: none;
             font-weight: 500;
         }
+
+        hr {
+            border: none;
+            border-top: 1.5px solid #eef2f8;
+            margin: 12px 0;
+        }
     </style>
 </head>
 <body>
-<div class="console">
-    <!-- Верхняя часть как на фото: логотип и подпись -->
-    <div class="header">
-        <div class="logo-icon">G</div>
-        <div class="title-section">
-            <h2>GREEN-API</h2>
-            <div class="sub">Тестовая панель методов</div>
+<div class="dashboard">
+    <!-- ЛЕВАЯ КОЛОНКА: все элементы управления -->
+    <div class="left-panel">
+        <div class="header">
+            <!-- Реальный логотип GREEN-API -->
+            <img class="logo-img" src="https://static.rustore.ru/imgproxy/CPAfQM6Sv_cWZzgdSbc_gPcqeIYxvhPPsfI6EN9SrtU/preset:vk_og_img/plain/https://static.rustore.ru/apk/2063583573/content/ICON/0e41c60f-96af-4b71-9da9-13eae6a9b6b2.png" alt="GREEN-API logo">
+            <div class="title-section">
+                <h2>GREEN-API</h2>
+                <div class="sub">Тестовая панель методов</div>
+            </div>
+        </div>
+
+        <!-- Учётные данные -->
+        <div class="input-block">
+            <label class="input-label">idInstance</label>
+            <input type="text" id="idInstance" class="field" placeholder="1101234567" autocomplete="off">
+            
+            <label class="input-label">ApiTokenInstance</label>
+            <input type="password" id="apiTokenInstance" class="field" placeholder="••••••••••••••••" autocomplete="off">
+        </div>
+
+        <!-- Кнопки методов (столбиком) -->
+        <div class="action-stack">
+            <button class="btn btn-primary" id="btnGetSettings">⚙️ getSettings</button>
+            <button class="btn btn-primary" id="btnGetStateInstance">📡 getStateInstance</button>
+        </div>
+
+        <!-- Блок sendMessage с выпадающей панелью -->
+        <div>
+            <button class="btn btn-outline" id="btnSendMessage">💬 sendMessage</button>
+            <div id="sendMessagePanel" class="inline-panel" style="display: none;">
+                <div class="row-dual">
+                    <div class="dual-item">
+                        <label>📞 Chat ID (WhatsApp)</label>
+                        <input type="text" id="chatId" class="inline-field" placeholder="7777234567@c.us" value="7777234567@c.us">
+                    </div>
+                    <div class="dual-item">
+                        <label>💬 Сообщение</label>
+                        <input type="text" id="messageText" class="inline-field" placeholder="Hello Gmail!" value="Hello Gmail!">
+                    </div>
+                </div>
+                <div class="panel-action-btn">
+                    <button class="btn btn-primary btn-small" id="sendMessageExecute">Отправить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Блок sendFileByUrl с выпадающей панелью -->
+        <div style="margin-top: 8px;">
+            <button class="btn btn-outline" id="btnSendFileByUrl">📎 sendFileByUrl</button>
+            <div id="sendFilePanel" class="inline-panel" style="display: none;">
+                <div class="row-dual">
+                    <div class="dual-item">
+                        <label>📞 Chat ID</label>
+                        <input type="text" id="fileChatId" class="inline-field" placeholder="7777234567@c.us" value="7777234567@c.us">
+                    </div>
+                    <div class="dual-item">
+                        <label>🔗 URL файла</label>
+                        <input type="text" id="fileUrl" class="inline-field" placeholder="https://..." value="https://avatars.mds.yandex.net/i?id=907e62a6623d91c19e9d33c37940198b_l-8310482-images-thumbs&n=13">
+                    </div>
+                </div>
+                <div class="row-dual">
+                    <div class="dual-item">
+                        <label>📄 Имя файла</label>
+                        <input type="text" id="fileName" class="inline-field" placeholder="horse.png" value="horse.png">
+                    </div>
+                    <div class="dual-item"></div>
+                </div>
+                <div class="panel-action-btn">
+                    <button class="btn btn-primary btn-small" id="sendFileExecute">Отправить файл</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- GitHub ссылка (в левой колонке снизу) -->
+        <div class="footer-github">
+            <a href="#" id="githubLink" target="_blank">github.com/DzoT1999-sys/test</a>
         </div>
     </div>
 
-    <!-- idInstance и ApiTokenInstance (две строки или рядом — в макете они идут друг под другом) -->
-    <div class="input-block">
-        <div class="credential-row">
-            <div class="credential-item">
-                <label class="input-label">idInstance</label>
-                <input type="text" id="idInstance" class="field" placeholder="1101234567" autocomplete="off" value="">
-            </div>
-            <div class="credential-item">
-                <label class="input-label">ApiTokenInstance</label>
-                <input type="password" id="apiTokenInstance" class="field" placeholder="••••••••••••••••" autocomplete="off" value="">
-            </div>
-        </div>
-    </div>
-
-    <!-- Кнопки методов: getSettings, getStateInstance, sendMessage, sendFileByUrl (точно как в макете) -->
-    <div class="action-bar">
-        <button class="btn btn-primary" id="btnGetSettings">⚙️ getSettings</button>
-        <button class="btn btn-primary" id="btnGetStateInstance">📡 getStateInstance</button>
-        <button class="btn btn-outline" id="btnSendMessage">💬 sendMessage</button>
-        <button class="btn btn-outline" id="btnSendFileByUrl">📎 sendFileByUrl</button>
-    </div>
-
-    <!-- Блоки, отображаемые динамически при необходимости (по макету — поля появляются под кнопками) -->
-    <!-- sendMessage панель -->
-    <div id="sendMessagePanel" class="inline-panel" style="display: none;">
-        <div class="row-dual">
-            <div class="dual-item">
-                <label>📞 Chat ID (WhatsApp)</label>
-                <input type="text" id="chatId" class="inline-field" placeholder="7777234567@c.us" value="7777234567@c.us">
-            </div>
-            <div class="dual-item">
-                <label>💬 Сообщение</label>
-                <input type="text" id="messageText" class="inline-field" placeholder="Hello Gmail!" value="Hello Gmail!">
-            </div>
-        </div>
-        <div style="display: flex; justify-content: flex-end;">
-            <button class="btn btn-primary" id="sendMessageExecute" style="padding: 10px 24px;">Отправить</button>
-        </div>
-    </div>
-
-    <!-- sendFileByUrl панель -->
-    <div id="sendFilePanel" class="inline-panel" style="display: none;">
-        <div class="row-dual">
-            <div class="dual-item">
-                <label>📞 Chat ID</label>
-                <input type="text" id="fileChatId" class="inline-field" placeholder="7777234567@c.us" value="7777234567@c.us">
-            </div>
-            <div class="dual-item">
-                <label>🔗 URL файла</label>
-                <input type="text" id="fileUrl" class="inline-field" placeholder="https://my.spec.com/img/horse.png" value="https://my.spec.com/img/horse.png">
-            </div>
-        </div>
-        <div class="row-dual">
-            <div class="dual-item">
-                <label>📄 Имя файла</label>
-                <input type="text" id="fileName" class="inline-field" placeholder="horse.png" value="horse.png">
-            </div>
-            <div class="dual-item"></div> <!-- пустой для выравнивания -->
-        </div>
-        <div style="display: flex; justify-content: flex-end;">
-            <button class="btn btn-primary" id="sendFileExecute" style="padding: 10px 24px;">Отправить файл</button>
-        </div>
-    </div>
-
-    <!-- Область вывода ответа (в макете: "Ответ:" и пример json) -->
-    <div class="response-container">
-        <div class="response-label">
-            <span>📋 Ответ сервера</span>
+    <!-- ПРАВАЯ КОЛОНКА: ответ сервера -->
+    <div class="right-panel">
+        <div class="response-header">
+            <h3>📋 Ответ сервера</h3>
             <button class="btn-clear" id="clearResponseBtn">Очистить</button>
         </div>
         <div class="response-box">
             <pre id="responseOutput" class="response-output"></pre>
         </div>
-    </div>
-
-    <!-- Ссылка на GitHub (как в макете — внизу) -->
-    <div class="footer-github">
-        <a href="#" id="githubLink" target="_blank">github.com/your/green-api-test</a>
+        <!-- Небольшая подсказка -->
+        <div style="margin-top: 16px; color: #6a7f9f; font-size: 13px; text-align: center;">
+            ⓘ Ответ отображается в формате JSON
+        </div>
     </div>
 </div>
 
@@ -386,27 +402,23 @@
     (function(){
         "use strict";
 
-        // ----- Элементы DOM -----
+        // DOM элементы
         const idInstanceInput = document.getElementById('idInstance');
         const apiTokenInput = document.getElementById('apiTokenInstance');
         const responseOutput = document.getElementById('responseOutput');
 
-        // Кнопки верхнего уровня
         const btnGetSettings = document.getElementById('btnGetSettings');
         const btnGetStateInstance = document.getElementById('btnGetStateInstance');
         const btnSendMessage = document.getElementById('btnSendMessage');
         const btnSendFileByUrl = document.getElementById('btnSendFileByUrl');
 
-        // Панели
         const sendMessagePanel = document.getElementById('sendMessagePanel');
         const sendFilePanel = document.getElementById('sendFilePanel');
 
-        // Поля sendMessage
         const chatIdInput = document.getElementById('chatId');
         const messageTextInput = document.getElementById('messageText');
         const sendMessageExec = document.getElementById('sendMessageExecute');
 
-        // Поля sendFile
         const fileChatIdInput = document.getElementById('fileChatId');
         const fileUrlInput = document.getElementById('fileUrl');
         const fileNameInput = document.getElementById('fileName');
@@ -415,10 +427,9 @@
         const clearBtn = document.getElementById('clearResponseBtn');
         const githubLink = document.getElementById('githubLink');
 
-        // Настройка ссылки (условно)
-        githubLink.href = "https://github.com/yourusername/green-api-test-task";
+        githubLink.href = "https://github.com/DzoT1999-sys/test";
 
-        // ----- Утилиты -----
+        // Утилиты
         function displayResponse(methodLabel, data, isError = false) {
             const time = new Date().toLocaleTimeString();
             let out = `[${time}] ${methodLabel}\n`;
@@ -482,13 +493,13 @@
             }
         }
 
-        // Скрываем панели при вызове get-методов
+        // Скрыть все панели
         function hidePanels() {
             sendMessagePanel.style.display = 'none';
             sendFilePanel.style.display = 'none';
         }
 
-        // ----- Обработчики -----
+        // Обработчики
         btnGetSettings.addEventListener('click', () => {
             hidePanels();
             callApi('getSettings');
@@ -500,22 +511,17 @@
         });
 
         btnSendMessage.addEventListener('click', () => {
-            // Переключаем видимость панели
             hidePanels();
             sendMessagePanel.style.display = 'block';
-            // Можно подсказать
-            if (!responseOutput.textContent.includes('заполните')) {
-                displayResponse('sendMessage', '⏳ Заполните поля и нажмите "Отправить"');
-            }
+            displayResponse('sendMessage', '⏳ Заполните поля и нажмите "Отправить"');
         });
 
         btnSendFileByUrl.addEventListener('click', () => {
             hidePanels();
             sendFilePanel.style.display = 'block';
-            displayResponse('sendFileByUrl', '⏳ Введите chatId, URL и имя файла, затем "Отправить файл"');
+            displayResponse('sendFileByUrl', '⏳ Введите данные и нажмите "Отправить файл"');
         });
 
-        // Отправка сообщения
         sendMessageExec.addEventListener('click', () => {
             const chatId = chatIdInput.value.trim();
             const message = messageTextInput.value.trim();
@@ -526,7 +532,6 @@
             callApi('sendMessage', { chatId, message }, true);
         });
 
-        // Отправка файла
         sendFileExec.addEventListener('click', () => {
             const chatId = fileChatIdInput.value.trim();
             const urlFile = fileUrlInput.value.trim();
@@ -540,25 +545,16 @@
 
         clearBtn.addEventListener('click', clearResponse);
 
-        // Дополнительно: при клике вне панелей можно не скрывать, поведение как в макете
-        // Если хотим сделать как на скрине — панели остаются до следующего переключения.
-        // Также предзаполняем дефолтные значения из макета для наглядности
+        // Демо-ответ при загрузке (как в макете)
         window.addEventListener('load', () => {
-            // Примерные данные из макета
             idInstanceInput.placeholder = "1101234567";
             apiTokenInput.placeholder = "••••••••••••";
-            // Пример ответа в макете: показываем при загрузке?
-            displayResponse('DEMO', { "idMessage": "3EB0C7C70D37B7C7C03D" });
-            // Почистим через пару секунд? Нет, оставим как иллюстрацию, но можно очистить
-            // Для соответствия макету оставляем демо-ответ, но пользователь может очистить.
             setTimeout(() => {
-                // если хотим показать точь-в-точь как на скрине:
                 responseOutput.textContent = `[DEMO] sendMessage\n{\n  "idMessage": "3EB0C7C70D37B7C7C03D"\n}`;
             }, 10);
         });
 
-        // Для удобства: при фокусе на любом поле не скрываем панели.
-        console.log('✅ Макет GREEN-API готов');
+        console.log('✅ Двухколоночный макет GREEN-API активирован');
     })();
 </script>
 </body>
