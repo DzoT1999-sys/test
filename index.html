@@ -3,307 +3,385 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GREEN-API Test Task</title>
+    <title>GREEN-API · Тестовая панель</title>
     <style>
         * {
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
+
         body {
-            background: #f0f2f5;
+            background-color: #f3f5f9;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            margin: 0;
-            padding: 20px;
+            padding: 24px;
         }
-        .card {
-            max-width: 800px;
+
+        .dashboard {
+            max-width: 1200px;
             width: 100%;
-            background: white;
-            border-radius: 24px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-            padding: 32px;
-            transition: all 0.2s ease;
-        }
-        h1 {
-            font-size: 28px;
-            font-weight: 600;
-            margin-top: 0;
-            margin-bottom: 8px;
-            color: #1a1a1a;
             display: flex;
-            align-items: center;
-            gap: 12px;
+            gap: 24px;
+            align-items: stretch;
         }
-        .logo {
-            height: 32px;
-            width: auto;
-        }
-        .subhead {
-            color: #5e5e5e;
-            margin-bottom: 28px;
-            font-size: 16px;
-            border-bottom: 1px solid #e9edf2;
-            padding-bottom: 16px;
-        }
-        .section {
-            background: #f9fafc;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 24px;
-            border: 1px solid #eef2f6;
-        }
-        .section-title {
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: #1e293b;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .section-title i {
-            color: #00a884;
-        }
-        .input-group {
+
+        .left-panel {
+            flex: 1.2;
+            background-color: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px -8px rgba(0, 20, 30, 0.12);
+            padding: 32px 28px;
+            border: 1px solid #eaedf2;
             display: flex;
             flex-direction: column;
-            gap: 16px;
         }
-        .input-row {
+
+        .right-panel {
+            flex: 1;
+            background-color: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px -8px rgba(0, 20, 30, 0.12);
+            padding: 32px 28px;
+            border: 1px solid #eaedf2;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 32px;
         }
-        .input-row label {
-            min-width: 130px;
-            font-weight: 500;
-            color: #334155;
-        }
-        .input-row input {
-            flex: 1;
-            padding: 12px 16px;
-            border: 1.5px solid #dde3e9;
-            border-radius: 12px;
-            font-size: 15px;
-            transition: 0.15s;
+
+        .logo-img {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            object-fit: contain;
             background: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
-        .input-row input:focus {
+
+        .title-section h2 {
+            font-weight: 700;
+            font-size: 24px;
+            color: #0b1c2c;
+            letter-spacing: -0.01em;
+        }
+
+        .title-section .sub {
+            font-size: 15px;
+            color: #5e6f8c;
+            margin-top: 4px;
+        }
+
+        .input-block {
+            margin-bottom: 28px;
+        }
+
+        .input-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1f2a41;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .field {
+            background-color: #f7f9fc;
+            border: 1.5px solid #dfe5ef;
+            border-radius: 18px;
+            padding: 14px 18px;
+            width: 100%;
+            font-size: 15px;
+            color: #0f1a2a;
+            transition: 0.15s;
+            margin-bottom: 18px;
+        }
+
+        .field:focus {
             outline: none;
             border-color: #00a884;
-            box-shadow: 0 0 0 3px rgba(0,168,132,0.1);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(0, 168, 132, 0.08);
         }
-        .input-row input::placeholder {
-            color: #94a3b8;
-        }
-        .button-group {
+
+        .action-stack {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 12px;
-            margin: 24px 0 16px;
+            margin-bottom: 24px;
         }
+
         .btn {
-            background: white;
-            border: 1.5px solid #dde3e9;
-            color: #1e293b;
-            padding: 12px 24px;
+            border: none;
             border-radius: 40px;
-            font-size: 15px;
+            padding: 14px 20px;
             font-weight: 600;
+            font-size: 15px;
+            background-color: #edf2f9;
+            color: #1f2a41;
             cursor: pointer;
-            transition: all 0.15s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            display: inline-flex;
+            transition: all 0.15s ease;
+            border: 1px solid transparent;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            flex: 0 1 auto;
+            width: 100%;
         }
+
         .btn-primary {
-            background: #00a884;
-            border-color: #00a884;
+            background-color: #00a884;
             color: white;
-            box-shadow: 0 4px 8px rgba(0,168,132,0.2);
+            box-shadow: 0 8px 16px -4px rgba(0, 168, 132, 0.25);
         }
+
         .btn-primary:hover {
-            background: #008f6f;
-            border-color: #008f6f;
+            background-color: #009070;
+            transform: translateY(-1px);
         }
+
         .btn-outline {
-            background: white;
-            border: 1.5px solid #00a884;
-            color: #00a884;
+            background-color: white;
+            border: 1.5px solid #d0dbea;
+            color: #1e2b3c;
         }
+
         .btn-outline:hover {
-            background: #e6f7f3;
+            background-color: #f9fbfd;
+            border-color: #00a884;
         }
-        .btn:active {
-            transform: scale(0.97);
+
+        .inline-panel {
+            background: #fafcff;
+            border-radius: 22px;
+            padding: 20px 18px;
+            margin: 10px 0 18px;
+            border: 1px solid #e6ecf5;
         }
-        .response-area {
-            background: #1e1e2f;
+
+        .row-dual {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+
+        .dual-item {
+            flex: 1;
+            min-width: 160px;
+        }
+
+        .dual-item label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #435574;
+            margin-bottom: 6px;
+        }
+
+        .inline-field {
+            background: white;
+            border: 1.5px solid #dee6f0;
             border-radius: 16px;
-            padding: 20px;
-            margin-top: 8px;
+            padding: 12px 16px;
+            width: 100%;
+            font-size: 14px;
         }
+
+        .inline-field:focus {
+            border-color: #00a884;
+            outline: none;
+        }
+
+        .panel-action-btn {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 6px;
+        }
+
+        .btn-small {
+            padding: 10px 22px;
+            font-size: 14px;
+            width: auto;
+        }
+
         .response-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
-            color: #a6b0c3;
-            font-size: 14px;
-            font-weight: 500;
+            margin-bottom: 16px;
         }
-        .response-header button {
-            background: #2d2d44;
-            border: none;
-            color: #a6b0c3;
-            padding: 6px 14px;
-            border-radius: 24px;
+
+        .response-header h3 {
+            font-weight: 600;
+            font-size: 18px;
+            color: #1f2a41;
+        }
+
+        .response-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-clear, .btn-copy {
+            background: none;
+            border: 1px solid #d9e2ef;
+            padding: 6px 16px;
+            border-radius: 30px;
+            color: #5e7a9c;
+            font-weight: 500;
             font-size: 13px;
             cursor: pointer;
-            transition: 0.1s;
+            transition: all 0.1s;
         }
-        .response-header button:hover {
-            background: #3a3a5a;
-            color: white;
+
+        .btn-clear:hover, .btn-copy:hover {
+            background: #eef3fc;
         }
-        #responseOutput {
-            background: #0e0e1a;
-            color: #e2e8f0;
-            padding: 18px;
-            border-radius: 12px;
-            min-height: 220px;
-            max-height: 400px;
-            overflow: auto;
-            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+
+        .response-box {
+            background-color: #f2f6fe;
+            border-radius: 24px;
+            padding: 24px;
+            border: 1px solid #e2eaf5;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .response-output {
+            background-color: #ffffff;
+            border-radius: 18px;
+            padding: 24px;
+            font-family: 'SF Mono', 'Menlo', 'Monaco', 'Cascadia Code', 'Consolas', monospace;
             font-size: 14px;
             line-height: 1.5;
+            color: #1e293b;
+            border: 1px solid #dde3ed;
+            min-height: 300px;
+            max-height: 600px;
+            overflow-y: auto;
             white-space: pre-wrap;
-            word-break: break-all;
-            border: 1px solid #2a2a40;
+            word-break: break-word;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
             margin: 0;
+            flex: 1;
         }
-        #responseOutput:empty::before {
+
+        .response-output:empty::before {
             content: "Ответ появится здесь...";
-            color: #5f6a84;
+            color: #8899b6;
         }
-        .hint {
+
+        .footer-github {
+            margin-top: 20px;
+            text-align: right;
             font-size: 13px;
-            color: #64748b;
-            margin-top: 6px;
-            margin-left: 4px;
         }
-        .footer {
-            margin-top: 24px;
-            text-align: center;
-            font-size: 14px;
-            color: #8c9aa8;
-        }
-        .footer a {
+
+        .footer-github a {
             color: #00a884;
             text-decoration: none;
-        }
-        .status-badge {
-            display: inline-block;
-            background: #e9edf2;
-            padding: 4px 12px;
-            border-radius: 24px;
-            font-size: 13px;
-            margin-left: 8px;
+            font-weight: 500;
         }
     </style>
 </head>
 <body>
-<div class="card">
-    <!-- Заголовок с логотипом (макет) -->
-    <h1>
-        <svg width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="40" height="40" rx="12" fill="#00a884"/>
-            <path d="M20 8L12 14V26L20 32L28 26V14L20 8Z" fill="white" fill-opacity="0.9"/>
-            <circle cx="20" cy="20" r="6" fill="#00a884"/>
-        </svg>
-        GREEN-API Test Console
-    </h1>
-    <div class="subhead">
-        Введите учетные данные инстанса и используйте методы
-    </div>
+<div class="dashboard">
+    <!-- ЛЕВАЯ КОЛОНКА -->
+    <div class="left-panel">
+        <div class="header">
+            <img class="logo-img" src="logo.png" alt="GREEN-API logo">
+            <div class="title-section">
+                <h2>GREEN-API</h2>
+                <div class="sub">Тестовая панель методов</div>
+            </div>
+        </div>
 
-    <!-- Параметры подключения (idInstance и ApiTokenInstance) -->
-    <div class="section">
-        <div class="section-title">
-            <span>🔐 Параметры подключения</span>
+        <div class="input-block">
+            <label class="input-label">idInstance</label>
+            <input type="text" id="idInstance" class="field" placeholder="1101234567" autocomplete="off">
+            <label class="input-label">ApiTokenInstance</label>
+            <input type="password" id="apiTokenInstance" class="field" placeholder="••••••••••••••••" autocomplete="off">
         </div>
-        <div class="input-group">
-            <div class="input-row">
-                <label for="idInstance">idInstance</label>
-                <input type="text" id="idInstance" placeholder="например, 1101234567" autocomplete="off">
-            </div>
-            <div class="input-row">
-                <label for="apiTokenInstance">ApiTokenInstance</label>
-                <input type="password" id="apiTokenInstance" placeholder="токен экземпляра" autocomplete="off">
-                <!-- кнопка показать/скрыть токен необязательна, но удобно -->
-            </div>
-            <div class="hint">
-                ⓘ Скопируйте idInstance и ApiTokenInstance из личного кабинета GREEN-API
-            </div>
-        </div>
-    </div>
 
-    <!-- Блок управления методами -->
-    <div class="section">
-        <div class="section-title">
-            <span>⚡ Методы API</span>
+        <div class="action-stack">
+            <button class="btn btn-primary" id="btnGetSettings">⚙️ getSettings</button>
+            <button class="btn btn-primary" id="btnGetStateInstance">📡 getStateInstance</button>
         </div>
-        <div class="button-group">
-            <button class="btn btn-primary" id="btnGetSettings">🔧 getSettings</button>
-            <button class="btn btn-primary" id="btnGetStateInstance">📊 getStateInstance</button>
+
+        <div>
             <button class="btn btn-outline" id="btnSendMessage">💬 sendMessage</button>
+            <div id="sendMessagePanel" class="inline-panel" style="display: none;">
+                <div class="row-dual">
+                    <div class="dual-item">
+                        <label>📞 Chat ID (WhatsApp)</label>
+                        <input type="text" id="chatId" class="inline-field" placeholder="Укажите chatId получателя">
+                    </div>
+                    <div class="dual-item">
+                        <label>💬 Сообщение</label>
+                        <input type="text" id="messageText" class="inline-field" placeholder="Введите текст сообщения">
+                    </div>
+                </div>
+                <div class="panel-action-btn">
+                    <button class="btn btn-primary btn-small" id="sendMessageExecute">Отправить</button>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 8px;">
             <button class="btn btn-outline" id="btnSendFileByUrl">📎 sendFileByUrl</button>
+            <div id="sendFilePanel" class="inline-panel" style="display: none;">
+                <div class="row-dual">
+                    <div class="dual-item">
+                        <label>📞 Chat ID</label>
+                        <input type="text" id="fileChatId" class="inline-field" placeholder="Укажите chatId получателя">
+                    </div>
+                    <div class="dual-item">
+                        <label>🔗 URL файла</label>
+                        <input type="text" id="fileUrl" class="inline-field" placeholder="Вставьте ссылку на файл">
+                    </div>
+                </div>
+                <div class="row-dual">
+                    <div class="dual-item">
+                        <label>📄 Имя файла</label>
+                        <input type="text" id="fileName" class="inline-field" placeholder="Укажите наименование файла">
+                    </div>
+                    <div class="dual-item"></div>
+                </div>
+                <div class="panel-action-btn">
+                    <button class="btn btn-primary btn-small" id="sendFileExecute">Отправить файл</button>
+                </div>
+            </div>
         </div>
-        
-        <!-- Дополнительные поля для sendMessage и sendFileByUrl (появляются при необходимости) -->
-        <div id="sendMessageFields" style="display: none; margin-top: 16px;">
-            <div class="input-row">
-                <label for="chatId">chatId (WhatsApp)</label>
-                <input type="text" id="chatId" placeholder="71234567890@c.us или 71234567890-123456@g.us" value="79001234567@c.us">
-            </div>
-            <div class="input-row">
-                <label for="messageText">Текст сообщения</label>
-                <input type="text" id="messageText" placeholder="Привет! Это тестовое сообщение." value="Тест от GREEN-API">
-            </div>
-        </div>
-        <div id="sendFileFields" style="display: none; margin-top: 16px;">
-            <div class="input-row">
-                <label for="fileChatId">chatId (WhatsApp)</label>
-                <input type="text" id="fileChatId" placeholder="71234567890@c.us" value="79001234567@c.us">
-            </div>
-            <div class="input-row">
-                <label for="fileUrl">URL файла</label>
-                <input type="text" id="fileUrl" placeholder="https://example.com/image.jpg" value="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">
-            </div>
-            <div class="input-row">
-                <label for="fileName">Имя файла</label>
-                <input type="text" id="fileName" placeholder="document.pdf" value="testfile.pdf">
-            </div>
+
+        <div class="footer-github">
+            <a href="#" id="githubLink" target="_blank">github.com/DzoT1999-sys/test</a>
         </div>
     </div>
 
-    <!-- Область вывода ответов (readonly) -->
-    <div class="response-area">
+    <!-- ПРАВАЯ КОЛОНКА -->
+    <div class="right-panel">
         <div class="response-header">
-            <span>📋 Ответ сервера</span>
-            <button id="clearResponseBtn" title="Очистить">🗑️ Очистить</button>
+            <h3>📋 Ответ сервера</h3>
+            <div class="response-actions">
+                <button class="btn-copy" id="copyResponseBtn">📋 Копировать</button>
+                <button class="btn-clear" id="clearResponseBtn">🗑️ Очистить</button>
+            </div>
         </div>
-        <pre id="responseOutput"></pre>
-    </div>
-    <div class="footer">
-        <span>Тестовое задание GREEN-API · <a href="#" id="githubLink" target="_blank">GitHub</a></span>
+        <div class="response-box">
+            <pre id="responseOutput" class="response-output"></pre>
+        </div>
+        <div style="margin-top: 16px; color: #6a7f9f; font-size: 13px; text-align: center;">
+            ⓘ Ответ отображается в формате JSON
+        </div>
     </div>
 </div>
 
@@ -311,209 +389,173 @@
     (function(){
         "use strict";
 
-        // ---------- DOM элементы ----------
+        // DOM элементы
         const idInstanceInput = document.getElementById('idInstance');
         const apiTokenInput = document.getElementById('apiTokenInstance');
         const responseOutput = document.getElementById('responseOutput');
-        
-        // Кнопки методов
+
         const btnGetSettings = document.getElementById('btnGetSettings');
         const btnGetStateInstance = document.getElementById('btnGetStateInstance');
         const btnSendMessage = document.getElementById('btnSendMessage');
         const btnSendFileByUrl = document.getElementById('btnSendFileByUrl');
-        
-        // Поля для sendMessage / sendFileByUrl
-        const sendMessageFields = document.getElementById('sendMessageFields');
-        const sendFileFields = document.getElementById('sendFileFields');
+
+        const sendMessagePanel = document.getElementById('sendMessagePanel');
+        const sendFilePanel = document.getElementById('sendFilePanel');
+
         const chatIdInput = document.getElementById('chatId');
         const messageTextInput = document.getElementById('messageText');
+        const sendMessageExec = document.getElementById('sendMessageExecute');
+
         const fileChatIdInput = document.getElementById('fileChatId');
         const fileUrlInput = document.getElementById('fileUrl');
         const fileNameInput = document.getElementById('fileName');
+        const sendFileExec = document.getElementById('sendFileExecute');
+
         const clearBtn = document.getElementById('clearResponseBtn');
+        const copyBtn = document.getElementById('copyResponseBtn');
+        const githubLink = document.getElementById('githubLink');
 
-        // Базовый URL API (pool определяется по первым 4 символам idInstance)
-        const getApiBaseUrl = () => {
-            const id = idInstanceInput.value.trim();
-            if (!id) return null;
-            // Первые 4 символа idInstance используются как pool
-            const pool = id.substring(0, 4);
-            return `https://${pool}.api.green-api.com`;
-        };
+        githubLink.href = "https://github.com/DzoT1999-sys/test";
 
-        // Вспомогательная функция для вывода ответа
-        function displayResponse(method, data, isError = false) {
-            const timestamp = new Date().toLocaleTimeString();
-            let formatted = `[${timestamp}] ${method}\n`;
-            if (isError) {
-                formatted += `❌ ОШИБКА:\n`;
-            }
-            if (typeof data === 'object') {
-                formatted += JSON.stringify(data, null, 2);
-            } else {
-                formatted += String(data);
-            }
-            responseOutput.textContent = formatted;
+        // Утилиты
+        function displayResponse(methodLabel, data, isError = false) {
+            const time = new Date().toLocaleTimeString();
+            let out = `[${time}] ${methodLabel}\n`;
+            if (isError) out += `❌ Ошибка:\n`;
+            out += (typeof data === 'object') ? JSON.stringify(data, null, 2) : String(data);
+            responseOutput.textContent = out;
         }
 
-        // Очистка вывода
         function clearResponse() {
             responseOutput.textContent = '';
         }
 
-        // Проверка заполненности учетных данных
+        // Копирование ответа в буфер обмена
+        async function copyResponse() {
+            const text = responseOutput.textContent;
+            if (!text) {
+                alert('Нет данных для копирования');
+                return;
+            }
+            try {
+                await navigator.clipboard.writeText(text);
+                copyBtn.textContent = '✓ Скопировано';
+                setTimeout(() => {
+                    copyBtn.textContent = '📋 Копировать';
+                }, 1500);
+            } catch (err) {
+                alert('Не удалось скопировать: ' + err);
+            }
+        }
+
         function validateCredentials() {
             const id = idInstanceInput.value.trim();
             const token = apiTokenInput.value.trim();
             if (!id || !token) {
-                displayResponse('Валидация', '❌ Необходимо заполнить idInstance и ApiTokenInstance', true);
+                displayResponse('Валидация', '❌ idInstance и ApiTokenInstance обязательны', true);
                 return false;
             }
             return true;
         }
 
-        // Универсальная функция вызова API
+        function getBaseUrl() {
+            const id = idInstanceInput.value.trim();
+            if (!id) return null;
+            return `https://${id.substring(0,4)}.api.green-api.com`;
+        }
+
         async function callApi(method, body = null, isPost = false) {
             if (!validateCredentials()) return;
-            
+
             const id = idInstanceInput.value.trim();
             const token = apiTokenInput.value.trim();
-            const baseUrl = getApiBaseUrl();
-            if (!baseUrl) {
-                displayResponse(method, '❌ Некорректный idInstance', true);
-                return;
-            }
+            const base = getBaseUrl();
+            if (!base) return;
 
-            const url = `${baseUrl}/waInstance${id}/${method}/${token}`;
-            
+            const url = `${base}/waInstance${id}/${method}/${token}`;
             const options = {
                 method: isPost ? 'POST' : 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
             };
-            if (isPost && body) {
-                options.body = JSON.stringify(body);
-            }
+            if (isPost && body) options.body = JSON.stringify(body);
 
             try {
-                const response = await fetch(url, options);
-                const contentType = response.headers.get('content-type');
-                let responseData;
+                const res = await fetch(url, options);
+                const contentType = res.headers.get('content-type');
+                let respData;
                 if (contentType && contentType.includes('application/json')) {
-                    responseData = await response.json();
+                    respData = await res.json();
                 } else {
-                    responseData = await response.text();
+                    respData = await res.text();
                 }
-                
-                if (!response.ok) {
-                    // Ошибка от API
-                    displayResponse(method, {
-                        status: response.status,
-                        statusText: response.statusText,
-                        data: responseData
-                    }, true);
+
+                if (!res.ok) {
+                    displayResponse(method, { status: res.status, statusText: res.statusText, data: respData }, true);
                 } else {
-                    displayResponse(method, responseData);
+                    displayResponse(method, respData);
                 }
-            } catch (error) {
-                displayResponse(method, {
-                    error: 'Сетевая ошибка или CORS',
-                    message: error.message
-                }, true);
+            } catch (err) {
+                displayResponse(method, { error: err.message }, true);
             }
         }
 
-        // ----- Обработчики кнопок -----
+        function hidePanels() {
+            sendMessagePanel.style.display = 'none';
+            sendFilePanel.style.display = 'none';
+        }
+
+        // Обработчики
         btnGetSettings.addEventListener('click', () => {
+            hidePanels();
             callApi('getSettings');
         });
 
         btnGetStateInstance.addEventListener('click', () => {
+            hidePanels();
             callApi('getStateInstance');
         });
 
-        // sendMessage: показываем доп поля, при повторном нажатии отправляем
         btnSendMessage.addEventListener('click', () => {
-            // Если поля скрыты — показываем их и ждём заполнения
-            if (sendMessageFields.style.display === 'none' || !sendMessageFields.style.display) {
-                sendMessageFields.style.display = 'block';
-                sendFileFields.style.display = 'none';
-                // Можно подсказать в ответе
-                displayResponse('sendMessage', '⏳ Введите chatId и текст сообщения, затем нажмите кнопку ещё раз');
-                return;
-            }
-            
-            // Собираем данные и отправляем
+            hidePanels();
+            sendMessagePanel.style.display = 'block';
+            displayResponse('sendMessage', '⏳ Заполните поля и нажмите "Отправить"');
+        });
+
+        btnSendFileByUrl.addEventListener('click', () => {
+            hidePanels();
+            sendFilePanel.style.display = 'block';
+            displayResponse('sendFileByUrl', '⏳ Введите данные и нажмите "Отправить файл"');
+        });
+
+        sendMessageExec.addEventListener('click', () => {
             const chatId = chatIdInput.value.trim();
             const message = messageTextInput.value.trim();
             if (!chatId || !message) {
                 displayResponse('sendMessage', '❌ chatId и message обязательны', true);
                 return;
             }
-            
-            const body = {
-                chatId: chatId,
-                message: message
-            };
-            callApi('sendMessage', body, true);
+            callApi('sendMessage', { chatId, message }, true);
         });
 
-        // sendFileByUrl: показываем доп поля, при повторном нажатии отправляем
-        btnSendFileByUrl.addEventListener('click', () => {
-            if (sendFileFields.style.display === 'none' || !sendFileFields.style.display) {
-                sendFileFields.style.display = 'block';
-                sendMessageFields.style.display = 'none';
-                displayResponse('sendFileByUrl', '⏳ Введите chatId, URL файла и имя файла, затем нажмите кнопку ещё раз');
-                return;
-            }
-            
+        sendFileExec.addEventListener('click', () => {
             const chatId = fileChatIdInput.value.trim();
             const urlFile = fileUrlInput.value.trim();
             const fileName = fileNameInput.value.trim();
-            
             if (!chatId || !urlFile || !fileName) {
-                displayResponse('sendFileByUrl', '❌ chatId, urlFile и fileName обязательны', true);
+                displayResponse('sendFileByUrl', '❌ Все поля обязательны', true);
                 return;
             }
-            
-            const body = {
-                chatId: chatId,
-                urlFile: urlFile,
-                fileName: fileName
-            };
-            callApi('sendFileByUrl', body, true);
+            callApi('sendFileByUrl', { chatId, urlFile, fileName }, true);
         });
 
-        // Очистка ответа
         clearBtn.addEventListener('click', clearResponse);
+        copyBtn.addEventListener('click', copyResponse);
 
-        // Скрываем дополнительные поля при клике на другие методы (для UX)
-        btnGetSettings.addEventListener('click', () => {
-            sendMessageFields.style.display = 'none';
-            sendFileFields.style.display = 'none';
-        });
-        btnGetStateInstance.addEventListener('click', () => {
-            sendMessageFields.style.display = 'none';
-            sendFileFields.style.display = 'none';
+        window.addEventListener('load', () => {
+            clearResponse();
         });
 
-        // Дополнительно: возможность скрыть поля, если пользователь передумал
-        // Но можно оставить как есть.
-
-        // Обработка ввода idInstance (автоматически подставляем pool)
-        idInstanceInput.addEventListener('input', () => {
-            // Ничего не делаем, просто для информации
-        });
-
-        // Ссылка на GitHub (замените на ваш репозиторий)
-        document.getElementById('githubLink').href = 'https://github.com/yourusername/green-api-test-task';
-        
-        // Небольшое улучшение: показать/скрыть токен? можно добавить чекбокс
-        // Но не обязательно.
-
-        // Если нужно имитировать макет - всё уже есть.
-        console.log('GREEN-API test console ready');
+        console.log('✅ Двухколоночный макет GREEN-API готов');
     })();
 </script>
 </body>
